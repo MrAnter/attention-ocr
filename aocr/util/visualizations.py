@@ -58,7 +58,7 @@ def visualize_attention(filename, output_dir, attentions, pred, pad_width,
     else:
         filestring = os.path.splitext(os.path.basename(filename))[0]
         out_dir = os.path.join(output_dir, 'correct')
-    out_dir = os.path.join(out_dir, filestring.replace('/', '_'))
+    out_dir = os.path.join(out_dir, filestring.replace('/', '_').replace('.', '_').replace(' ', '_'))
 
     if not os.path.exists(out_dir):
         os.makedirs(out_dir)
