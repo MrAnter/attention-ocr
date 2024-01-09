@@ -58,12 +58,14 @@ def visualize_attention(filename, output_dir, attentions, pred, pad_width,
     else:
         filestring = os.path.splitext(os.path.basename(filename))[0]
         out_dir = os.path.join(output_dir, 'correct')
-    out_dir = os.path.join(out_dir, filestring.replace('/', '_').replace('.', '_').replace(' ', '_'))
+    for ch in ['/','\\','.',':','*','?','"','>','<','|',' ']:
+        filestring = filestring.replace(ch,"_")
+    out_dir = os.path.join(out_dir, filestring)
 
     if not os.path.exists(out_dir):
         os.makedirs(out_dir)
 
-    with open(os.path.join(out_dir, 'word.txt'), 'w') as fword:
+    with open(os.path.join(out_dir, 'word.txt'), 'w', encoding='utf-8') as fword:
         fword.write(pred + '\n')
         if ground is not None:
             fword.write(ground)
