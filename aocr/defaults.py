@@ -20,7 +20,7 @@ class Config(object):
     STEPS_PER_CHECKPOINT = 100
     EXPORT_FORMAT = 'savedmodel'
     EXPORT_PATH = 'exported'
-    FORCE_UPPERCASE = True
+    FORCE_UPPERCASE = False
     SAVE_FILENAME = False
     FULL_ASCII = False
 

@@ -17,7 +17,7 @@ def _int64_feature(value):
 
 
 def generate(annotations_path, output_path, log_step=5000,
-             force_uppercase=True, save_filename=False):
+             force_uppercase=False, save_filename=False):
 
     logging.info('Building a dataset from %s.', annotations_path)
     logging.info('Output file: %s', output_path)
