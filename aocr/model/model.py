@@ -359,6 +359,17 @@ class Model(object):
                              math.exp(result['loss']) if result['loss'] < 300 else float('inf'),
                              probability,
                              correctness))
+            with open("test_out_log.txt", "a", encoding = "utf-8") as file:
+                file.write('Step {:.0f} ({:.3f}s) ||| '
+                         'Accuracy: {:6.2%} ||| '
+                         'loss: {:f} ||| perplexity: {:0<7.6} ||| probability: {:6.2%} {}\n'.format(
+                             current_step,
+                             curr_step_time,
+                             num_correct / num_total,
+                             result['loss'],
+                             math.exp(result['loss']) if result['loss'] < 300 else float('inf'),
+                             probability,
+                             correctness))
 
     def train(self, data_path, num_epoch):
         logging.info('num_epoch: %d', num_epoch)
@@ -418,6 +429,15 @@ class Model(object):
 
             logging.info('Step %i: %.3fs, loss: %f, perplexity: %f.',
                          current_step, curr_step_time, result['loss'], step_perplexity)
+            
+            with open("train_out_log.txt", "a", encoding = "utf-8") as file:
+                file.write('Step {:.0f} ({:.3f}s) ||| '
+                         'loss: {:f} ||| '
+                         ' perplexity: {:f}\n'.format(
+                            current_step,
+                            curr_step_time,
+                            result['loss'],
+                            step_perplexity))
 
             # Once in a while, we save checkpoint, print statistics, and run evals.
             if current_step % self.steps_per_checkpoint == 0:
