@@ -445,6 +445,14 @@ class Model(object):
                 # Print statistics for the previous epoch.
                 logging.info("Global step %d. Time: %.3f, loss: %f, perplexity: %.2f.",
                              self.sess.run(self.global_step), step_time, loss, perplexity)
+
+                with open("train_out_check_log.txt", "w+", encoding = "utf-8") as file:
+                    file.write("Global step {:d} ||| Time: {:.3f} ||| loss: {:f} ||| perplexity: {:.2f}\n".format(
+                            self.sess.run(self.global_step),
+                            step_time,
+                            loss,
+                            perplexity))
+                
                 # Save checkpoint and reset timer and loss.
                 logging.info("Saving the model at step %d.", current_step)
                 self.saver_all.save(self.sess, self.checkpoint_path, global_step=self.global_step)
@@ -454,6 +462,12 @@ class Model(object):
         perplexity = math.exp(loss) if loss < 300 else float('inf')
         logging.info("Global step %d. Time: %.3f, loss: %f, perplexity: %.2f.",
                      self.sess.run(self.global_step), step_time, loss, perplexity)
+        with open("train_out_check_log.txt", "w+", encoding = "utf-8") as file:
+                    file.write("Global step {:d} ||| Time: {:.3f} ||| loss: {:f} ||| perplexity: {:.2f}\n".format(
+                            self.sess.run(self.global_step),
+                            step_time,
+                            loss,
+                            perplexity))
 
         if skipped_counter:
             logging.info("Skipped {} batches due to errors.".format(skipped_counter))
